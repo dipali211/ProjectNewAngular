@@ -1,0 +1,20 @@
+.table{
+    margin: 20px;
+    padding: 50px;
+    
+}
+.odd{
+    background-color: darkcyan;
+}
+.even{
+    background-color: rgb(2, 119, 80);
+}
+p{
+    font-size: larger;
+    font-weight: 800;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: crimson;
+}
+label{
+    font-weight: 800;
+}

@@ -1,0 +1,13 @@
+<p id="shadow">Display product data using *ngFor</p>
+<div class="container">
+    <div class="product-list">
+      <div class="product-card" *ngFor="let product of products">
+        <img [src]="product.image" alt="{{product.name}}">
+        <h3>{{product.name}}</h3>
+        <p>{{product.description}}</p>
+        <p><strong>Price: {{product.price | currency}}</strong></p>
+        <button [disabled]="product.isOutOfStock" (click)="addToCart(product)">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+  

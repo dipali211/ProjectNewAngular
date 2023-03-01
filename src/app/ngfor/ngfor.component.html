@@ -1,0 +1,74 @@
+<p>*ngfor Assignment</p>
+<!-- <div>
+    <div>{{titlr}}</div>
+
+ <table >
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Title</th>
+        <th scope="col">Director</th>
+        <th scope="col">Cast </th>
+        <th scope="col">ReleaseDate </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let movie of movie let i = index; let evenItem = even;let oddItem = odd" [class.even]="evenItem" [class.odd]="oddItem">
+        <th >{{i + 1}}</th>
+        <td>{{movie.title}}</td>
+            <td>{{movie.directoe}}</td>
+            <td>{{movie.cast}}</td>
+            <td>{{movie.releaseDate}}</td>
+      </tr>
+     
+    </tbody>
+  </table>
+</div> -->
+
+<!-- <ol>
+
+  <li>
+    <label>
+      Select a state:
+      <select [(ngModel)]="selectedState">
+        <option *ngFor="let state of states" [value]="state.name">
+          {{ state.name }}
+        </option>
+      </select>
+    </label>
+  </li>
+
+  <li>
+
+    <label>
+      Select a country:
+      <select [(ngModel)]="selectedCountry" (ngModelChange)="updateStates()" >
+        <option   value="none" selected disabled hidden  >Select your country</option>
+        <option *ngFor="let country of countries" [value]="country.name">
+          {{ country.name }}
+        </option>
+      </select>
+    </label>
+  </li>
+</ol> -->
+
+
+
+<div>
+  <label>Select Country:</label>
+  <select [(ngModel)]="selectedCountry" (ngModelChange)="updateStates()">
+    <option value="">Select your country</option>
+    <option *ngFor="let country of countries" [value]="country.code"  >{{country.name}}</option>
+  </select>
+</div>
+<br>
+<div>
+  <label>Select State:</label>
+  <select [(ngModel)]="selectedState">
+    <option *ngFor="let state of states" [value]="state.code">{{state.name}}</option>
+  </select>
+</div>
+
+
+
+

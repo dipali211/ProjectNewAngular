@@ -1,0 +1,17 @@
+<div class="font">
+  <div class="bg">
+    <button (click)="toggleContent()" >Display Details</button> <!--? button which says 'Display Details' -->
+    <p *ngIf="ContentVisible" class="content display-content">{{content}}</p>    <!-- ? Add a paragraph with any content of your choice (e.g. 'Secret Password = tuna')-->
+  
+    <h4> Log Output: </h4>
+    <p *ngFor="let log of togglingLog; index as i" 
+        [ngStyle]="{backgroundColor: applyColor(i)}"
+        [ngClass]="{'log-op': i >= limit}">
+    
+    <!-- ?Log all button clicks in an array and output that array below the secret paragraph (maybe log a timestamp or simply an incrementing number) -->
+    <!-- ?Starting at the 5th log item, give all future log items a blue background (via ngStyle) and white color (ngClass) -->
+      {{log}}
+    </p>
+  </div>
+  </div>
+  

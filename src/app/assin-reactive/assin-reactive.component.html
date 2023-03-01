@@ -1,0 +1,64 @@
+<div class="container">
+<div class=" row card-shadow">
+  <h2>Reactive  Assignment</h2>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="email">Email Address</label>
+    <input type="email" formControlName="email" id="email" />
+    <div *ngIf="form.get('email').invalid && (form.get('email').dirty || form.get('email').touched)">
+      <div class="text-danger" *ngIf="form.get('email').errors.required">Email is required.</div>
+      <!-- <div class="text-danger" *ngIf="form.get('email').errors.email">Invalid email format.</div> -->
+    </div>
+  </div>
+
+  <div>
+    <label for="subscription">Subscription</label>
+    <select formControlName="subscription" id="subscription">
+      <option value="Basic">Basic</option>
+      <option value="Advanced">Advanced</option>
+      <option value="Pro">Pro</option>
+    </select>
+    <div *ngIf="form.get('subscription').invalid && (form.get('subscription').dirty || form.get('subscription').touched)">
+      Subscription is must.
+    </div>
+  </div>
+
+  <div>
+    <label for="password">Password</label>
+    <input type="password" formControlName="password" id="password" />
+    <div class="text-danger" *ngIf="form.get('password').invalid && (form.get('password').dirty || form.get('password').touched)">
+      Password is required.
+    </div>
+  </div>
+
+  <div>
+    <label for="date">Date</label>
+    <input type="date" formControlName="date" id="date" />
+    <div *ngIf="form.get('date').invalid && (form.get('date').dirty || form.get('date').touched)">
+      <!-- <div class="text-danger" *ngIf="form.get('date').errors.required">Date is required.</div> -->
+      <div class="text-danger" *ngIf="form.get('date').errors.futureDate">Date must be today or a future date.</div>
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="form.invalid && form.touched">Submit</button>
+</form>
+</div>
+<br>
+<hr>
+<hr>
+
+<div >
+<div class="row justify-content-center mt-2" *ngIf="isSubmitted">
+  <div class="col-md-6 rounded shadow py4">
+    <h2>Form Data</h2>
+    <p>Email: <strong>  {{ form.get('email').value}}</strong></p>
+    <p>subscription: <strong>  {{ form.get('subscription').value}}</strong></p>
+
+    <p>password: <strong>  {{ form.get('password').value}}</strong></p>
+
+    <p>date: <strong>  {{ form.get('date').value}}</strong></p>
+
+  </div>
+</div>
+</div>
+</div>

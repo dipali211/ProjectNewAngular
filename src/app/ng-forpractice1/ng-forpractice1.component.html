@@ -1,0 +1,20 @@
+<p id="shadow">Display Fruits list using *ngFor</p>
+<div class="container mt-5">
+    <h2 class="text-center mb-3">Fruits List</h2>
+    <div class="card-deck">
+      <div class="card mb-4" *ngFor="let fruit of fruits">
+        <img [src]="fruit.image" class="card-img-top" alt="{{fruit.name}}">
+        <div class="card-body">
+          <h5 class="card-title">{{fruit.name}}</h5>
+          <p class="card-text">{{fruit.description}}</p>
+          <p class="card-text">
+            <small class="text-muted">
+              {{fruit.price | currency}} per {{fruit.unit}}
+            </small>
+          </p>
+          <button class="btn btn-primary" [disabled]="!fruit.isAvailable">{{fruit.isAvailable ? 'Add to Cart' : 'Sold Out'}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

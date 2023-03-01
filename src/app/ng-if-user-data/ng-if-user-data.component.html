@@ -1,0 +1,37 @@
+<div class="neo">
+<p>Add or remove user data using *ngFor & ngIf</p>
+<div class="container mt-5" id="show">
+    <div class="row">
+      <div class="col-sm-12">
+        <div *ngIf="showUserList">
+          <table class="table table-striped">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of users; index as i">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>{{ user.name }}</td>
+                <td>{{ user.email }}</td>
+                <td><button class="btn btn-danger" (click)="removeUser(i)">Remove</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div *ngIf="!showUserList">
+          <h3 class="text-center">No users to display.</h3>
+        </div>
+        <div class="d-flex justify-content-around mt-3">
+          <button class="btn btn-primary" (click)="addUser()">Add User</button>
+          <button class="btn btn-danger" (click)="removeAllUsers()">Remove All Users</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  

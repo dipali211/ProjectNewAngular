@@ -1,0 +1,125 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+<mat-card class="login-page">
+  <mat-card-title>
+      Login (Template-Driven) 
+  </mat-card-title>
+  <mat-card-content>
+      <form class="login-form" #loginForm="ngForm">
+        <mat-form-field>
+                
+          <input matInput type="email" name="email"
+          ngModel
+          #email="ngModel"
+          required email 
+          pattern="[A-Za-z0-9._%+-]+@codemindtechnology\.com"
+          minlength="3" maxlength="35"
+          placeholder="Email">
+
+          <mat-error *ngIf="email.errors?.required">The email is mandatory</mat-error>
+          <mat-error     *ngIf="email.errors?.pattern">Please enter a valid domain </mat-error>
+
+          <mat-error *ngIf="email.errors?.minlength">
+            your email must have minimum {{email.errors?.minlength.requiredLength}} chars,
+            but it only has {{email.errors?.minlength.actualLength}}.
+          </mat-error>
+        </mat-form-field>
+
+         
+          <!-- <mat-form-field>
+              
+              <input matInput type="email" name="email"
+              ngModel
+              #email="ngModel"
+              required email 
+              placeholder="Email">
+
+             
+
+             <small *ngIf="!email.valid && email.touched">This email is mandatory</small>
+          </mat-form-field> -->
+          
+          <small style="font-size: 20px; margin-top: 1.0rem;" *ngIf="email.invalid && (email.dirty || email.touched)">
+            <small *ngIf="email.errors.required">Email is required</small>
+            <small *ngIf="email.errors.email">Invalid email format</small>
+          </small>
+          <!-- <small *ngIf="!userDetail.valid && userDetail.touched">This email is mandatory</small> -->
+          <!-- <mat-error *ngIf="userDetail.email.errors?.required">The email is mandatory.</mat-error> -->
+          <mat-form-field>
+              <input matInput  ngModel 
+               #password="ngModel" 
+                name="password"
+                type="{{showPassword ? 'text' : 'password'}}"
+                 pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$"
+          minlength="8"
+          
+                 placeholder="password" required password >
+                 <span  (click)="toggleShowPassword()">
+                  <i class="{{showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'}}" style="cursor: pointer;margin-left: -30px"></i>
+                </span>
+                 <!-- <i class="far fa-eye" (click)="togglePassword()" style="margin-left: -30px; 
+                 cursor: pointer;"></i> -->
+                 
+                 <mat-error *ngIf="password.errors?.required"></mat-error>
+                 <mat-error     *ngIf="password.errors?.pattern">Please enter a valid password </mat-error>
+       
+                 <mat-error *ngIf="password.errors?.minlength">
+                  password must contain at least one lowercase , one uppercase and one number
+                </mat-error>
+          </mat-form-field>
+      
+          <!-- <mat-form-field appearance="fill">
+              <mat-label [ngModel]="defaultValue"></mat-label>
+              <mat-select  >
+                <mat-option value="Angular">Angular</mat-option>
+                <mat-option value="Javascript" >Javascript</mat-option>
+                <mat-option value="Typescript">Typescript</mat-option>
+              </mat-select>
+            </mat-form-field> -->
+
+            <select class="form-control" name="course" [(ngModel)]="defaultValue" >
+              <option *ngFor="let course of courses"  [value]="course">{{course}}</option>
+            </select>
+
+            <div class="form-group" *ngFor="let gender of genders">
+
+
+              <input type="radio" name="gender" id="gender" [value]="gender.value" [(ngModel)]="defaultGender"
+              class="custom-control custom-radio">
+              <label for="{{gender.id}}">{{gender.value}}</label>
+            </div>
+          <!-- <button  mat-raised-button  (click)="login(loginForm)">Reset and set default value</button> -->
+     
+          <button class="button" mat-raised-button  (click)="login(loginForm)">
+            <span class="button_lg">
+                <span class="button_sl"></span>
+                <span class="button_text">Reset and set default value</span>
+            </span>
+        </button>
+        </form>
+      <div class="form-val">
+          <!-- {{ loginForm.value | json}} -->
+      </div>
+  </mat-card-content>
+</mat-card>
+<div class="container">
+<div class="row justify-content-center mt2" *ngIf="isSubmitted">
+  <div class="col-md-6 rounded shadow py-4">
+    <h2>Form Data</h2>
+    <p>Email: <strong>{{formData.email}}</strong></p>
+    <p>Password: <strong>{{formData.password}}</strong></p>
+    <p>Course: <strong>{{formData.course}}</strong></p>
+    <p>Gender: <strong>{{formData.gender}}</strong></p>
+
+  </div>
+</div>
+</div>
+<!-- <div class="row justify-content-center mt2" *ngIf="isSubmitted">
+  <div class="col-md-6 rounded shadow py-4">
+    <h2>Form Data</h2>
+    <p>Email: <strong>{{formData.email}}</strong></p>
+    <p>Password: <strong>{{formData.password}}</strong></p>
+    <p>Course: <strong>{{formData.course}}</strong></p>
+    <p>Gender: <strong>{{formData.gender}}</strong></p>
+
+  </div>
+</div> -->

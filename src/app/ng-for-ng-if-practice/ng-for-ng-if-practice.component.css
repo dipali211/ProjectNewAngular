@@ -1,0 +1,32 @@
+.completed {
+    text-decoration: line-through;
+    color: #6c757d;
+  }
+  h3{
+    font-weight: bold;
+    margin-left: 10px;
+  }
+  p{
+    color: brown;
+    font-weight: 900;
+    font-size: larger;
+    text-shadow: 9px -3px 5px rgba(28,12,7,0.78);  }
+  .neo{
+    border-radius: 34px;
+background: linear-gradient(145deg, #cacaca, #f0f0f0);
+box-shadow:  25px 25px 50px #bebebe,
+             -25px -25px 50px #ffffff;
+  }
+  input[type="text"] {
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+  
+  

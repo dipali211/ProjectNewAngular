@@ -1,0 +1,387 @@
+<div class="container">
+  <div class="row">
+    <div class="col-2">
+      <div class="user-details-container">
+        <img class="user-image" src="assets\img\img1.jpg" alt="user image" />
+        <span class="user-title">{{
+          userDetailsForm.get("fullname").value
+        }}</span>
+        <p class="user-bio">{{ userDetailsForm.get("bio").value }}</p>
+      </div>
+    </div>
+
+    <div class="col">
+      <h2 class="section-title">User details</h2>
+      <form
+        [formGroup]="userDetailsForm"
+        (ngSubmit)="onSubmitUserDetails(userDetailsForm.value)"
+      >
+        <div class="form-group">
+          <mat-form-field class="example-full-width">
+            <input
+              matInput
+              type="text"
+              id="fullname"
+              placeholder="Full Name"
+              formControlName="fullname"
+              required
+            />
+          </mat-form-field>
+          <ng-container *ngFor="let validation of validation_messages.fullname">
+            <small
+              class="form-text text-danger"
+              *ngIf="
+                userDetailsForm.get('fullname').hasError(validation.type) &&
+                (userDetailsForm.get('fullname').dirty ||
+                  userDetailsForm.get('fullname').touched)
+              "
+            >
+              {{ validation.message }}
+            </small>
+          </ng-container>
+        </div>
+
+        <mat-form-field class="full-width">
+          <input
+            matInput
+            [matDatepicker]="picker"
+            placeholder="Your birthday"
+            formControlName="birthday"
+            required
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngFor="let validation of validation_messages.birthday">
+            <mat-error
+              class="error-message"
+              *ngIf="
+                userDetailsForm.get('birthday').hasError(validation.type) &&
+                (userDetailsForm.get('birthday').dirty ||
+                  userDetailsForm.get('birthday').touched)
+              "
+              >{{ validation.message }}</mat-error
+            >
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-select placeholder="Gender">
+            <mat-option *ngFor="let gender of genders" [value]="gender">
+              {{ gender }}
+            </mat-option>
+          </mat-select>
+          <div
+            class="invalid-feedback"
+            *ngFor="let validation of validation_messages.gender"
+          >
+            <div
+              *ngIf="
+                userDetailsForm.get('gender').hasError(validation.type) &&
+                (userDetailsForm.get('gender').dirty ||
+                  userDetailsForm.get('gender').touched)
+              "
+            >
+              {{ validation.message }}
+            </div>
+          </div>
+        </mat-form-field>
+
+        <mat-card-content>
+          <form [formGroup]="phoneForm">
+            <mat-form-field class="full-width col-4">
+              <mat-label>Country</mat-label>
+              <mat-select formControlName="country">
+                <mat-option
+                  *ngFor="let country of countries"
+                  [value]="country.code"
+                  >{{ country.name }}</mat-option
+                >
+              </mat-select>
+
+              <mat-error
+                *ngIf="
+                  phoneForm.get('country').invalid &&
+                  (phoneForm.get('country').dirty ||
+                    phoneForm.get('country').touched)
+                "
+              >
+                Please select a country.
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="full-width col-8">
+              <mat-label>Phone number</mat-label>
+              <input matInput formControlName="phone" />
+              <mat-hint align="end"
+                ><strong>Fixed:</strong>
+                {{
+                  userDetailsForm.value.countryPhone.country.sampleFixedPhone
+                }}</mat-hint
+              >
+              <mat-error
+                *ngIf="
+                  phoneForm.get('phone').invalid &&
+                  (phoneForm.get('phone').dirty ||
+                    phoneForm.get('phone').touched)
+                "
+              >
+                <span *ngIf="phoneForm.get('phone').hasError('required')">
+                  Phone number is required.
+                </span>
+                <span *ngIf="phoneForm.get('phone').hasError('pattern')">
+                  Please enter a valid phone number for the selected country.
+                </span>
+                <span *ngIf="phoneForm.get('phone').hasError('maxlength')">
+                  Phone number cannot be longer than 15 digits.
+                </span>
+              </mat-error>
+            </mat-form-field>
+          </form>
+        </mat-card-content>
+
+        <mat-form-field class="full-width">
+          <textarea
+            matInput
+            maxlength="256"
+            placeholder="Bio"
+            formControlName="bio"
+            matTextareaAutosize
+            matAutosizeMinRows="2"
+            matAutosizeMaxRows="5"
+          ></textarea>
+          <mat-hint>Tell us about yourself </mat-hint>
+          <mat-hint align="end"
+            >{{ userDetailsForm.get("bio").value.length }} / 256</mat-hint
+          >
+          <div *ngFor="let validation of validation_messages.bio">
+            <div
+              *ngIf="
+                userDetailsForm.get('bio').hasError(validation.type) &&
+                (userDetailsForm.get('bio').dirty ||
+                  userDetailsForm.get('bio').touched)
+              "
+              class="text-danger"
+            >
+              {{ validation.message }}
+            </div>
+          </div>
+        </mat-form-field>
+
+        <button
+          class="submit-btn"
+          color="primary"
+          mat-raised-button
+          type="submit"
+          [disabled]="!userDetailsForm.valid"
+        >
+          Submit
+        </button>
+        
+      </form>
+    </div>
+
+    <div class="col">
+      <h2 class="section-title">Account details</h2>
+      <form
+        [formGroup]="accountDetailsForm"
+        novalidate
+        (ngSubmit)="onSubmitAccountDetails(accountDetailsForm.value)"
+      >
+        <div class="form-group">
+          <mat-form-field class="example-full-width">
+            <input
+              matInput
+              type="text"
+              id="username"
+              name="username"
+              placeholder="Username"
+              formControlName="username"
+              maxlength="25"
+              required
+            />
+          </mat-form-field>
+          <ng-container
+            *ngIf="
+              accountDetailsForm.get('username').invalid &&
+              (accountDetailsForm.get('username').dirty ||
+                accountDetailsForm.get('username').touched)
+            "
+          >
+            <div
+              class="invalid-feedback"
+              *ngFor="let validation of account_validation_messages.username"
+              [ngClass]="{
+                'd-block': accountDetailsForm
+                  .get('username')
+                  .hasError(validation.type)
+              }"
+            >
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+
+        <div class="form-group">
+          <mat-form-field class="example-full-width">
+            <input
+              matInput
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Email"
+              formControlName="email"
+              required
+            />
+          </mat-form-field>
+          <ng-container
+            *ngIf="
+              accountDetailsForm.get('email').invalid &&
+              (accountDetailsForm.get('email').dirty ||
+                accountDetailsForm.get('email').touched)
+            "
+          >
+            <div
+              class="invalid-feedback"
+              *ngFor="let validation of account_validation_messages.email"
+              [ngClass]="{
+                'd-block': accountDetailsForm
+                  .get('email')
+                  .hasError(validation.type)
+              }"
+            >
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+
+        <div class="form-group" formGroupName="matchingPasswords">
+          <div class="form-row">
+            <div class="col">
+              <mat-form-field class="example-full-width">
+                <input
+                  type="password"
+                  matInput
+                  id="password"
+                  name="password"
+                  placeholder="Password"
+                  formControlName="password"
+                  required
+                />
+              </mat-form-field>
+              <ng-container
+                *ngIf="
+                  accountDetailsForm.get('matchingPasswords').get('password')
+                    .invalid &&
+                  (accountDetailsForm.get('matchingPasswords').get('password')
+                    .dirty ||
+                    accountDetailsForm.get('matchingPasswords').get('password')
+                      .touched)
+                "
+              >
+                <div
+                  class="invalid-feedback"
+                  *ngFor="
+                    let validation of account_validation_messages.password
+                  "
+                  [ngClass]="{
+                    'd-block': accountDetailsForm
+                      .get('matchingPasswords')
+                      .get('password')
+                      .hasError(validation.type)
+                  }"
+                >
+                  {{ validation.message }}
+                </div>
+              </ng-container>
+            </div>
+            <div class="col">
+              <mat-form-field class="example-full-width">
+                <input
+                  matInput
+                  type="password"
+                  id="confirmPassword"
+                  name="confirm_password"
+                  placeholder="Confirm Password"
+                  formControlName="confirm_password"
+                  required
+                  [ngClass]="{
+                    'is-invalid':
+                      accountDetailsForm
+                        .get('matchingPasswords')
+                        .get('confirm_password').invalid &&
+                      (accountDetailsForm
+                        .get('matchingPasswords')
+                        .get('confirm_password').dirty ||
+                        accountDetailsForm
+                          .get('matchingPasswords')
+                          .get('confirm_password').touched)
+                  }"
+                />
+              </mat-form-field>
+              <ng-container
+                *ngIf="
+                  (accountDetailsForm
+                    .get('matchingPasswords')
+                    .get('confirm_password').invalid ||
+                    accountDetailsForm.get('matchingPasswords').invalid) &&
+                  (accountDetailsForm
+                    .get('matchingPasswords')
+                    .get('confirm_password').dirty ||
+                    accountDetailsForm
+                      .get('matchingPasswords')
+                      .get('confirm_password').touched)
+                "
+              >
+                <div
+                  class="invalid-feedback"
+                  *ngFor="
+                    let validation of account_validation_messages.confirm_password
+                  "
+                  [ngClass]="{
+                    'd-block':
+                      accountDetailsForm
+                        .get('matchingPasswords')
+                        .get('confirm_password')
+                        .hasError(validation.type) ||
+                      accountDetailsForm
+                        .get('matchingPasswords')
+                        .hasError(validation.type)
+                  }"
+                >
+                  {{ validation.message }}
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+
+        <mat-checkbox formControlName="terms">
+          I accept terms and conditions
+        </mat-checkbox>
+        <mat-error *ngFor="let validation of account_validation_messages.terms">
+          <mat-error
+            class="error-message"
+            *ngIf="
+              accountDetailsForm.get('terms').hasError(validation.type) &&
+              (accountDetailsForm.get('terms').dirty ||
+                accountDetailsForm.get('terms').touched)
+            "
+            >{{ validation.message }}</mat-error
+          >
+        </mat-error>
+
+        <button
+          class="submit-btn"
+          color="primary"
+          mat-raised-button
+          type="submit"
+          [disabled]="!accountDetailsForm.valid"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+h3 {
+    font-size: 22px;
+    color: #6c757d;
+    text-align: center;
+  }
+  
+  .neo{
+    border-radius: 29px;
+    background: #e0e0e0;
+    box-shadow:  5px 5px 9px #5a5a5a,
+                 -5px -5px 9px #ffffff;
+  } 
+  #show{
+    
+    border-radius: 29px;
+    background: #e0e0e0;
+    box-shadow:  5px 5px 9px #5a5a5a,
+                 -5px -5px 9px #ffffff;
+  }
+  p{
+    color: brown;
+    font-weight: 900;
+    font-size: larger;
+    text-shadow: 9px -3px 5px rgba(28,12,7,0.78);  }

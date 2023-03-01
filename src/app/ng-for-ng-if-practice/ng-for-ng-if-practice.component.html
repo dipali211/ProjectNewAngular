@@ -1,0 +1,30 @@
+<p>TODO list by using *ngFor & *ngIf</p>
+<div class="neo">
+<div class="container mt-5">
+    <div class="row">
+      <div class="col-sm-12">
+        <div *ngIf="todos.length; else noTodos">
+          <h3>Todo List</h3>
+          <ul class="list-group mt-3">
+            <li class="list-group-item" *ngFor="let todo of todos; index as i">
+              <div class="d-flex justify-content-between">
+                <div>
+                  <input type="checkbox" [checked]="todo.isComplete" (change)="toggleTodo(i)" />
+                  <span [ngClass]="{ 'completed': todo.isComplete }">{{ todo.text }}</span>
+                </div>
+                <button class="btn btn-danger btn-sm" (click)="removeTodo(i)">Remove</button>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <ng-template #noTodos>
+          <h3 class="text-center">No todos to display.</h3>
+        </ng-template>
+        <div class="d-flex justify-content-around mt-3">
+          <input type="text" [(ngModel)]="newTodoText" placeholder="Enter a new todo" />
+          <button class="btn btn-primary" (click)="addTodo()">Add Todo</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<div class="neo">
+<div class="container">
+    
+    <h2 class="text-center">List of Items(Print item avability using *ngFor)</h2>
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let item of items" [ngClass]="{ 'list-group-item-success': item.isAvailable }">
+        {{item.name}}
+        <span *ngIf="item.isAvailable" class="badge badge-success">Available</span>
+        <span *ngIf="!item.isAvailable" class="badge badge-danger">Not Available</span>
+      </li>
+    </ul>
+  </div>
+  <hr>
+
+   </div>
+
+
+  

@@ -1,0 +1,26 @@
+.success-message {
+    color: green;
+    font-size: 20px;
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 20px;
+  }
+  
+  .alert {
+    font-size: 22px;
+    text-align: center;
+  }
+  #shadow{
+    color: brown;
+    font-weight: 900;
+    font-size: larger;
+    text-shadow: 9px -3px 5px rgba(28,12,7,0.78);
+  }
+  .neo{
+    border-radius: 29px;
+    background: #e0e0e0;
+    box-shadow:  5px 5px 9px #5a5a5a,
+                 -5px -5px 9px #ffffff;
+  }

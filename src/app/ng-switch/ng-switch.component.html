@@ -1,0 +1,39 @@
+<p>ng-switch works!</p>
+<!-- users.component.html -->
+<div class="container">
+    <h1>User List</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Role</th>
+          <th>Access</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ user.id }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.role }}</td>
+          <td>
+            <div [ngSwitch]="user.role">
+              <div *ngSwitchCase="'admin'">
+                <span class="badge badge-danger">Full Access</span>
+              </div>
+              <div *ngSwitchCase="'moderator'">
+                <span class="badge badge-warning">Moderator Access</span>
+              </div>
+              <div *ngSwitchCase="'user'">
+                <span class="badge badge-secondary">Limited Access</span>
+              </div>
+              <div *ngSwitchDefault>
+                <span class="badge badge-secondary">Unknown Access</span>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
